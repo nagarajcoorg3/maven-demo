@@ -15,3 +15,15 @@ jobs:
        uses: actions/setup-java@v1
        with:
          java-version: 11
+     - name: exporting data to github env
+        run: |
+          echo "export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)')" 
+          export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)') >> $GITHUB_ENV
+ 
+          echo "export ARTIFACT_ID=$(less pom.xml | grep -i "ArtifactId" | head -n 1 | grep -oP '(?<=<artifactId>).*?(?=</artifactId>)')" 
+          export ARTIFACT_ID=$(less pom.xml | grep -i "ArtifactId" | head -n 1 | grep -oP '(?<=<artifactId>).*?(?=</artifactId>)') >> $GITHUB_ENV
+          echo "export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)')" 
+          export VERSION=$(less pom.xml | grep -iw "version" | head -n 1 | grep -oP '(?<=<version>).*?(?=</version>)') >> $GITHUB_ENV
+     - name: read data
+       run: |
+         env      
