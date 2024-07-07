@@ -16,7 +16,7 @@ jobs:
        with:
          java-version: 11
      - name: exporting data to github env
-        run: |
+       run: |
           echo "export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)')" 
           export GROUP_ID=$(less pom.xml | grep -i "groupId" | head -n 1 | grep -oP '(?<=<groupId>).*?(?=</groupId>)') >> $GITHUB_ENV
  
